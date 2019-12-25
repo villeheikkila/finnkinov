@@ -1,6 +1,7 @@
 import React from 'react';
 import { createUseStyles } from 'react-jss';
 import { MovieInterface } from '../services/themoviedb';
+import { MovieModal } from './MovieModal';
 
 const useStyles = createUseStyles({
     imageContainer: {
@@ -28,19 +29,21 @@ const useStyles = createUseStyles({
     },
 });
 
-export const Movie = ({ title, url, rating, posterUrl }: MovieInterface): JSX.Element => {
+export const Movie = ({ title, url, rating, posterUrl, trailerID }: MovieInterface): JSX.Element => {
     const classes = useStyles();
+    const [open, setOpen] = React.useState(false);
 
     const formattedRating = rating !== 0 ? rating.toFixed(1) : 'Not available';
 
     return (
-        <div className={classes.imageContainer}>
-            <a href={url}>
+        <>
+            <div className={classes.imageContainer} onClick={() => setOpen(true)}>
                 <img src={posterUrl} className={classes.image} alt={title} />
-            </a>
-            <div className={classes.text}>
-                <span className={classes.span}>{formattedRating}</span>
+                <div className={classes.text}>
+                    <span className={classes.span}>{formattedRating}</span>
+                </div>
             </div>
-        </div>
+            <MovieModal open={open} url={url} setOpen={setOpen} trailerID={trailerID} />
+        </>
     );
 };
