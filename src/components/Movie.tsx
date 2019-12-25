@@ -1,16 +1,21 @@
-import React from 'react';
-import { getMovieDetails } from '../services/themoviedb'
-import { MovieInterface } from '../App';
+import React from "react";
+import {createUseStyles} from 'react-jss'
+import { MovieInterface } from "../App";
 
-interface MovieProps {
-    title: string,
-    url: string,
-}
+const useStyles = createUseStyles({
+  image: {
+    display: "inline-block",
+  }
+})
 
-export const Movie = ({title, url, rating, posterUrl }: MovieInterface) => {
+export const Movie = ({ title, url, rating, posterUrl }: MovieInterface) => {
+  const classes = useStyles()
+
   return (
-    <div>
-        <a href={url}>{title}</a>{rating} <a href={posterUrl}>{posterUrl}</a>
+    <div className="image-item">
+      <a href={url}>
+        <img src={posterUrl} className={classes.image}/>
+      </a>
     </div>
   );
-}
+};
