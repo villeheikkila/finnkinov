@@ -56,6 +56,7 @@ export const MovieModal = ({
     rating,
 }: MovieModalProps): JSX.Element => {
     const classes = useStyles();
+    const formattedBudget = budget ? `Budget ${budget} million` : '';
 
     return (
         <Modal
@@ -65,13 +66,14 @@ export const MovieModal = ({
             contentLabel="Trailer Modal"
         >
             <YouTube videoId={trailerID} opts={opts} />
-            <button onClick={(): void => setOpen(false)}>Close</button>
+
+            <p className={classes.overview}>Overview: {overview}</p>
+            <p className={classes.overview}></p>
+            <p className={classes.overview}>{formattedBudget}</p>
+
             <a href={url}>
                 <button>Finnkino</button>
             </a>
-            <p className={classes.overview}>Overview: {overview}</p>
-            <p className={classes.overview}>Budget {budget} million</p>
-            <p className={classes.overview}>Rating {rating}/10</p>
         </Modal>
     );
 };
