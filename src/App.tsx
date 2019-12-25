@@ -35,15 +35,19 @@ const useStyles = createUseStyles({
     fontSize: 70,
     color: "white",
     fontWeight: 800,
-    fontFamily: 'PT Sans, sans-serif'
+    fontFamily: 'PT Sans, sans-serif',
   }
 });
 
 const App = () => {
-  const [data] = useFinnkino(1033, "27.12.2019");
+  const date = new Date();
+  const dateString = `${date.getDate()+1}.${date.getMonth()+1}.${date.getFullYear()}`
+  const [data] = useFinnkino(1033, dateString);
   const [movies, setMovies] = useState<MovieInterface[]>([]);
   const classes = useStyles();
 
+
+  console.log("dateString ", dateString)
   useEffect(() => {
     const getData = async () =>
       await Promise.all(data.map(e => getMovieDetails(e)));
@@ -54,7 +58,7 @@ const App = () => {
 
   return (
     <div className={classes.container}>
-      <header className={classes.header}>Movies running at Finnkino today</header>
+      <header className={classes.header}>Finnkino today</header>
       <div className={classes.imageGrid}>
         {movies.map((movie: MovieInterface) => (
           <Movie {...movie} />
