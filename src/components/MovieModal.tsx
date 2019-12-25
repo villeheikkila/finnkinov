@@ -1,6 +1,8 @@
 import React from 'react';
 import Modal from 'react-modal';
 import YouTube from 'react-youtube';
+import { MovieInterface } from '../services/themoviedb';
+import { createUseStyles } from 'react-jss';
 
 const customStyles = {
     overlay: {
@@ -22,6 +24,13 @@ const customStyles = {
     },
 };
 
+const useStyles = createUseStyles({
+    overview: {
+        color: 'white',
+        maxWidth: '640px',
+    },
+});
+
 const opts = {
     height: '390',
     width: '640',
@@ -30,14 +39,24 @@ const opts = {
     },
 };
 
-interface MovieModalProps {
+interface MovieModalProps extends MovieInterface {
     trailerID: string;
     open: boolean;
     url: string;
     setOpen: (value: boolean) => void;
 }
 
-export const MovieModal = ({ open, setOpen, url, trailerID }: MovieModalProps): JSX.Element => {
+export const MovieModal = ({
+    open,
+    setOpen,
+    url,
+    trailerID,
+    overview,
+    budget,
+    rating,
+}: MovieModalProps): JSX.Element => {
+    const classes = useStyles();
+
     return (
         <Modal
             isOpen={open}
@@ -50,6 +69,9 @@ export const MovieModal = ({ open, setOpen, url, trailerID }: MovieModalProps): 
             <a href={url}>
                 <button>Finnkino</button>
             </a>
+            <p className={classes.overview}>Overview: {overview}</p>
+            <p className={classes.overview}>Budget {budget} million</p>
+            <p className={classes.overview}>Rating {rating}/10</p>
         </Modal>
     );
 };

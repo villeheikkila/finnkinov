@@ -54,7 +54,7 @@ const App = (): JSX.Element => {
             <header className={classes.header}>Finnkino today</header>
             <div className={classes.imageGrid}>
                 {movies.map((movie: MovieInterface) => (
-                    <Movie key={movie.title} {...movie} />
+                    <Movie key={movie.title} movie={movie} />
                 ))}
             </div>
         </div>

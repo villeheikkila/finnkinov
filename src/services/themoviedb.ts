@@ -8,6 +8,8 @@ export interface MovieInterface {
     posterUrl: string;
     rating: number;
     trailerID: string;
+    budget: number;
+    overview: string;
 }
 
 export const getMovieDetails = async (event: FinnkinoEvent): Promise<MovieInterface | undefined> => {
@@ -23,13 +25,14 @@ export const getMovieDetails = async (event: FinnkinoEvent): Promise<MovieInterf
         const { id, poster_path, vote_average } = data.results[0];
 
         const { data: videoData } = await axios(
-            `http://api.themoviedb.org/3/movie/${id}/videos?api_key=${MOVIEDB_API_KEY}`,
+            `http://api.themoviedb.org/3/movie/${id}?api_key=${MOVIEDB_API_KEY}&append_to_response=videos`,
         );
-
-        const trailerID = data.results[0] && videoData.results[0].key;
         console.log('video ', videoData);
+        const { overview } = videoData;
+        const trailerID = videoData.videos.results[0] && videoData.videos.results[0].key;
+        const budget = videoData.budget / 1000000;
         const posterUrl = 'https://image.tmdb.org/t/p/w500' + poster_path;
-        return { ...event, posterUrl, rating: vote_average, trailerID };
+        return { ...event, posterUrl, rating: vote_average, trailerID, budget, overview };
     } catch (error) {
         console.error(error);
     }

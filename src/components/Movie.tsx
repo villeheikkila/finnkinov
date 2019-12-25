@@ -29,8 +29,12 @@ const useStyles = createUseStyles({
     },
 });
 
-export const Movie = ({ title, url, rating, posterUrl, trailerID }: MovieInterface): JSX.Element => {
+interface MovieProps {
+    movie: MovieInterface;
+}
+export const Movie = ({ movie }: MovieProps): JSX.Element => {
     const classes = useStyles();
+    const { title, url, rating, posterUrl, trailerID } = movie;
     const [open, setOpen] = React.useState(false);
 
     const formattedRating = rating !== 0 ? rating.toFixed(1) : 'Not available';
@@ -43,7 +47,7 @@ export const Movie = ({ title, url, rating, posterUrl, trailerID }: MovieInterfa
                     <span className={classes.span}>{formattedRating}</span>
                 </div>
             </div>
-            <MovieModal open={open} url={url} setOpen={setOpen} trailerID={trailerID} />
+            <MovieModal open={open} url={url} setOpen={setOpen} {...movie} />
         </>
     );
 };
