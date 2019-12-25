@@ -11,6 +11,10 @@ Website that shows Finnkino's currently running movies sorted by MovieDB rating.
 
 ## List of required environment variables
 
-| Environment variable               | Effect                                                                 |
-| ---------------------------------- | ---------------------------------------------------------------------- |
-| REACT_APP_MOVIEDB               | MovieDB API key |
+| Environment variable | Effect          |
+| -------------------- | --------------- |
+| REACT_APP_MOVIEDB    | MovieDB API key |
+
+## Issues
+
+Finnkino API seems to sometimes take very long time, up to minutes, to respond.
