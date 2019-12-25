@@ -40,7 +40,7 @@ function notEmpty<TValue>(value: TValue | null | undefined): value is TValue {
 const App = (): JSX.Element => {
     const date = new Date();
     const dateString = `${date.getDate() + 1}.${date.getMonth() + 1}.${date.getFullYear()}`;
-    const [data] = useFinnkino(1033, dateString);
+    const data = useFinnkino(1033, dateString);
     const [movies, setMovies] = useState<MovieInterface[]>([]);
     const classes = useStyles();
 

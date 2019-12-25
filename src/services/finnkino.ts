@@ -6,7 +6,7 @@ export interface FinnkinoEvent {
     title: string;
     url: string;
 }
-export const useFinnkino = (id: number, date: string): FinnkinoEvent[][] => {
+export const useFinnkino = (id: number, date: string): FinnkinoEvent[] => {
     const [data, setData] = useState<FinnkinoEvent[]>([]);
 
     useEffect(() => {
@@ -27,5 +27,5 @@ export const useFinnkino = (id: number, date: string): FinnkinoEvent[][] => {
         })();
     }, [id, date]);
 
-    return [data];
+    return data;
 };
