@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useFinnkino, FinnkinoEvent } from "./services/finnkino";
+import { useFinnkino } from "./services/finnkino";
 import { Movie } from "./components/Movie";
 import { getMovieDetails } from "./services/themoviedb";
 import { createUseStyles } from "react-jss";
+import {JssProvider} from 'react-jss'
 
 export interface MovieInterface {
   title: string;
@@ -46,25 +47,25 @@ const App = () => {
   const [movies, setMovies] = useState<MovieInterface[]>([]);
   const classes = useStyles();
 
-
-  console.log("dateString ", dateString)
   useEffect(() => {
     const getData = async () =>
       await Promise.all(data.map(e => getMovieDetails(e)));
     getData().then((detailed: any) =>
-      setMovies(detailed.sort((a: any, b: any) => b.rating - a.rating))
+      setMovies(detailed.filter((e: any) => e !== undefined).sort((a: any, b: any) => b.rating - a.rating))
     );
   }, [data]);
 
   return (
+    <JssProvider>
     <div className={classes.container}>
       <header className={classes.header}>Finnkino today</header>
       <div className={classes.imageGrid}>
         {movies.map((movie: MovieInterface) => (
-          <Movie {...movie} />
+          <Movie key={movie.title} {...movie} />
         ))}
       </div>
     </div>
+    </JssProvider>
   );
 };
 
