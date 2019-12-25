@@ -3,7 +3,6 @@ import { useFinnkino } from './services/finnkino';
 import { Movie } from './components/Movie';
 import { getMovieDetails, MovieInterface } from './services/themoviedb';
 import { createUseStyles } from 'react-jss';
-import { JssProvider } from 'react-jss';
 
 const useStyles = createUseStyles({
     '@global': {
@@ -51,16 +50,14 @@ const App = (): JSX.Element => {
     }, [data]);
 
     return (
-        <JssProvider>
-            <div className={classes.container}>
-                <header className={classes.header}>Finnkino today</header>
-                <div className={classes.imageGrid}>
-                    {movies.map((movie: MovieInterface) => (
-                        <Movie key={movie.title} {...movie} />
-                    ))}
-                </div>
+        <div className={classes.container}>
+            <header className={classes.header}>Finnkino today</header>
+            <div className={classes.imageGrid}>
+                {movies.map((movie: MovieInterface) => (
+                    <Movie key={movie.title} {...movie} />
+                ))}
             </div>
-        </JssProvider>
+        </div>
     );
 };
 
