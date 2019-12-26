@@ -34,7 +34,7 @@ interface MovieProps {
 }
 export const Movie = ({ movie }: MovieProps): JSX.Element => {
     const classes = useStyles();
-    const { title, url, rating, posterUrl, trailerID } = movie;
+    const { title, url, rating, posterUrl } = movie;
     const [open, setOpen] = React.useState(false);
 
     const formattedRating = rating !== 0 ? rating.toFixed(1) : 'Not available';
