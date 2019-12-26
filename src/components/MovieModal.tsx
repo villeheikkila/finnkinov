@@ -4,6 +4,27 @@ import YouTube from 'react-youtube';
 import { MovieInterface } from '../services/themoviedb';
 import { createUseStyles } from 'react-jss';
 
+const useStyles = createUseStyles({
+    overview: {
+        color: 'white',
+        maxWidth: '1000px',
+    },
+    button: {
+        backgroundColor: '#ECCB2F',
+        color: 'white',
+        border: 'none',
+        textAlign: 'center',
+        textDecoration: 'none',
+        display: 'inline-block',
+        padding: '15px 32px',
+        fontWeight: 'bold',
+        borderRadius: '5px',
+        fontFamily: 'Work Sans',
+        textTransform: 'uppercase',
+        fontSize: 20,
+    },
+});
+
 const customStyles = {
     overlay: {
         position: 'fixed',
@@ -21,19 +42,14 @@ const customStyles = {
         marginRight: '-50%',
         transform: 'translate(-50%, -50%)',
         background: 'black',
+        fontFamily: 'Roboto',
+        borderColor: '#ECCB2F',
     },
 };
 
-const useStyles = createUseStyles({
-    overview: {
-        color: 'white',
-        maxWidth: '640px',
-    },
-});
-
-const opts = {
-    height: '390',
-    width: '640',
+const options = {
+    height: '563',
+    width: '1000',
     playerVars: {
         autoplay: 1 as 1,
     },
@@ -46,17 +62,9 @@ interface MovieModalProps extends MovieInterface {
     setOpen: (value: boolean) => void;
 }
 
-export const MovieModal = ({
-    open,
-    setOpen,
-    url,
-    trailerID,
-    overview,
-    budget,
-    rating,
-}: MovieModalProps): JSX.Element => {
+export const MovieModal = ({ open, setOpen, url, trailerID, overview, budget }: MovieModalProps): JSX.Element => {
     const classes = useStyles();
-    const formattedBudget = budget ? `Budget ${budget} million` : '';
+    const formattedBudget = budget ? `The budget was ${budget} million.` : '';
 
     return (
         <Modal
@@ -65,14 +73,14 @@ export const MovieModal = ({
             style={customStyles}
             contentLabel="Trailer Modal"
         >
-            <YouTube videoId={trailerID} opts={opts} />
+            <YouTube videoId={trailerID} opts={options} />
 
-            <p className={classes.overview}>Overview: {overview}</p>
+            <p className={classes.overview}>{overview}</p>
             <p className={classes.overview}></p>
             <p className={classes.overview}>{formattedBudget}</p>
 
             <a href={url}>
-                <button>Finnkino</button>
+                <button className={classes.button}>Tickets</button>
             </a>
         </Modal>
     );
