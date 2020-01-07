@@ -15,6 +15,3 @@ Website that shows Finnkino's currently running movies sorted by MovieDB rating.
 | -------------------- | --------------- |
 | REACT_APP_MOVIEDB    | MovieDB API key |
 
-## Issues
-
-Finnkino API seems to sometimes take very long time, up to minutes, to respond.
